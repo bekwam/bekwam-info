@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bekwam.info</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<div class="grid h-screen place-items-center">
+<div class="max-w-sm rounded overflow-hidden shadow-lg">
+    <div class="px-6 py-4">
+        <div class="font-bold text-xl mb-2" id="name"></div>
+        <div class="italic text-m mb-2" id="descr"></div>
+        <p class="text-gray-700 text-base" id="address1"></p>
+        <p class="text-gray-700 text-base" id="address2"></p>
+        <p class="text-gray-700 text-base">
+            <span id="city"></span>, <span id="state"></span>
+        </p>
+        <p class="text-gray-700 text-base" id="zip"></p>
+    </div>
+    <div class="px-6 pt-4 pb-2">
+        <i class="fa-regular fa-envelope"></i>
+        <span class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">For consulting contact: <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                                                                                                                                  href="mailto:sales@bekwam.com" id="email">sales@bekwam.com</a></span>
+    </div>
+</div>
+</div>
+<script>
+    async function fetchContact() {
+        try {
+            const response = await fetch('./contact');
+            const data = await response.json();
+
+            const name = document.getElementById("name");
+            name.innerText = data.name;
+
+            const descr = document.getElementById("descr");
+            descr.innerText = data.descr;
+
+            const address1 = document.getElementById("address1");
+            address1.innerText = data.address1;
+
+            const address2 = document.getElementById("address2");
+            address2.innerText = data.address2;
+
+            const city = document.getElementById("city");
+            city.innerText = data.city;
+
+            const state = document.getElementById("state");
+            state.innerText = data.state;
+
+            const zip = document.getElementById("zip");
+            zip.innerText = data.zip;
+
+            const emailLink = document.getElementById("email");
+            emailLink.href = "mailto:" + data.email;
+            emailLink.innerText = data.email;
+
+        } catch (e) {
+            console.error(e);
+        }
+    }
+// ************************************************************************
+// script execution starts here
+// ************************************************************************
+    fetchContact();
+
+</script>
+</body>
+</html>
